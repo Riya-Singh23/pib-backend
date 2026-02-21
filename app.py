@@ -19,7 +19,7 @@ def get_pib_news():
     count = int(request.args.get('count', 10))
 
     try:
-        url = "https://pib.gov.in/allRel.aspx"
+        url = "https://www.agriwelfare.gov.in/en/Recent"
         response = requests.get(url, headers=HEADERS, timeout=15)
         response.raise_for_status()
 
@@ -50,7 +50,7 @@ def get_pib_news():
 
         # Fallback — try Google News RSS for PIB (no blocking)
         if not news_list:
-            rss_url = "https://news.google.com/rss/search?q=site:pib.gov.in&hl=en-IN&gl=IN&ceid=IN:en"
+            rss_url = "https://news.google.com/rss/search?q=Department+of+Agriculture+Farmers+Welfare+India&hl=en-IN&gl=IN&ceid=IN:en"
             rss_response = requests.get(rss_url, headers=HEADERS, timeout=10)
             from xml.etree import ElementTree as ET
             root = ET.fromstring(rss_response.content)
@@ -79,4 +79,5 @@ def get_pib_news():
 
 
 if __name__ == "__main__":
+
     app.run(debug=True)
